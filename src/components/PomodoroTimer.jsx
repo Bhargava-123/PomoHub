@@ -4,51 +4,44 @@ import pauseIcon from "../assets/pause.svg";
 import playIcon from "../assets/play.svg";
 import "../assets/css/PomodoroTimer.scss";
 import stopIcon from "../assets/stop.svg";
-import { TimeContext } from '../contexts/TimerContextProvider';
 
 //WHAT TO DO WHEN THE TIMER ENDS ? RESET THE ORIGINAL EXPIRY TIME / GO TO BREAK /
 
 import { useState } from 'react';
 function MyTimer({ expiryTimestamp, workTime }) {
 
+
     const {
         minutes,
         seconds,
-        timerState,
-        handleTimerState,
-        handleRestart,
-    } = useContext(TimeContext);
-
-    // const {
-    //     minutes,
-    //     seconds,
-    //     pause,
-    //     resume,
-    //     restart,
-    // } = useTimer({ expiryTimestamp, onExpire: () => setTimerState("pause"),autoStart:false});
+        pause,
+        resume,
+        restart,
+    } = useTimer({ expiryTimestamp, onExpire: () => setTimerState("pause"),autoStart:false});
 
 
-    // const [timerState, setTimerState] = useState("pause");
+    const [timerState, setTimerState] = useState("pause");
 
-    // useEffect(() => {
-    //     timerState === "resume" ? resume() : pause();
-    // },[timerState])
+    useEffect(() => {
+        timerState === "resume" ? resume() : pause();
+        console.log(expiryTimestamp);
+    },[timerState])
 
-    // const handleTimerState = () => {
-    //     if (timerState == "pause") {
-    //         setTimerState("resume");
-    //     }
-    //     else {
-    //         setTimerState("pause");
-    //     }
-    // }
+    const handleTimerState = () => {
+        if (timerState == "pause") {
+            setTimerState("resume");
+        }
+        else {
+            setTimerState("pause");
+        }
+    }
 
-    // const handleRestart = () => {
-    //     const time = new Date();
-    //     time.setMinutes(time.getMinutes() + workTime);
-    //     restart(time, false);
-    //     setTimerState("pause");
-    // }
+    const handleRestart = () => {
+        const time = new Date();
+        time.setMinutes(time.getMinutes() + workTime);
+        restart(time, false);
+        setTimerState("pause");
+    }
 
     return (
         <div >

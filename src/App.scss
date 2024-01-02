@@ -6,6 +6,7 @@
 body {
   margin: 0px;
   font-family: 'Poppins', sans-serif;
+  overflow: hidden;
 }
 
 .App {
@@ -163,6 +164,12 @@ body {
   .collapsed{
     display: flex;
     margin-left: -4px;
+    img{
+      filter: invert(0%);
+      border-radius: 20px;
+      height: 2rem;
+      top: 5px;
+    }
   }
   width: 80px;
   .menu-item p{

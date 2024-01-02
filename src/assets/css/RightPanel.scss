@@ -1,0 +1,95 @@
+$red : rgb(186, 0, 0);
+$green: rgb(0, 160, 8);
+$blue: rgb(0, 14, 163);
+
+.right-panel-container{
+    display: flex;
+    flex-direction: row;
+    
+}
+.width-control-container{
+    display: flex;
+    align-items: center;
+    background-color: #1f1f1f;
+    padding-right: 10px;
+    width: 100px;
+    justify-content: flex-end;
+    &:hover{
+        .width-control{
+            display: block;
+        }
+    }
+    .width-control{
+        display: none;
+        cursor: pointer;
+        background-color: rgb(71, 71, 71);
+        width: 8px;
+        height: 30px;
+        border-radius: 20px;
+        &:hover{
+            background-color: rgb(154, 154, 154);
+        }
+        
+    }
+}
+.right-panel-button-container {
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    &.right-collapse {
+        width: 8px;
+
+        &>.mode-container>* {
+            display: none;
+        }
+    }
+
+    transition: all 0.6s ease-in-out;
+}
+.mode-container{
+    color: white;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 2rem;
+    word-wrap: break-word;
+    &:hover{
+        cursor: pointer;
+    }
+    transition: flex-grow 0.4s ease-out;
+}
+
+@mixin lighten($color){
+    background-color: adjust-color($color: $color , $hue: 0, $saturation: 0%, $lightness: 10%, $alpha: 1.0);
+    flex-grow: 2;
+    
+}
+.work{
+    background-color: $red;
+    &:hover{
+        border-bottom: 10px solid black;
+        @include lighten($red);
+    }
+    
+    flex-grow: 1;
+}
+.long-break{
+    background: $green;
+    flex-grow: 1;
+    &:hover {
+            border-top: 10px solid black;
+            
+            @include lighten($green);
+        }
+}
+
+.short-break{
+    background-color: $blue;
+    flex-grow: 1;
+    &:hover {
+            border-bottom: 10px solid black;
+            border-top: 10px solid black;
+            @include lighten($blue);
+        }
+}
