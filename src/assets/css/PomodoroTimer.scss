@@ -6,29 +6,27 @@
 .timer-content-container{
     color: white;
     background-color: #1f1f1f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-grow: 1;
 }
-.minutes-container{
-    flex-grow: 1;
-}
+
 .button-container{
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    flex-grow: 0.3;
-}
-.minutes-container{
-    flex-grow: 1;
+ 
 }
 
+
 .timer-container {
-    position: fixed;
-    left: calc(50% - 23rem);
-    top: 8rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     font-size: 22rem;
-    fontVariant: ["tabular-nums"]
-    
+    font-variant-numeric: tabular-nums;
+    font-family:monospace;
+    gap: 0.5rem;
+
 }

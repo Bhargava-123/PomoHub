@@ -142,13 +142,18 @@ body {
 }
 
 .width-line {
+  &:hover{
+    filter: opacity(100%);
+  }
   cursor: pointer;
   background-color: #999999;
+  filter:opacity(20%);
   border-radius: 100px;
   position: relative;
   left: 10px;
   height: 30px;
   width: 8px;
+  
 }
 
 .panel-container.collapse {
