@@ -2,36 +2,35 @@
   font-family: 'Poppins';
   src: local('Poppins'), url(./assets/Poppins/) format('ttf');
 }
-body{
+
+@mixin collapsed{
+  @container 
+}
+body {
   margin: 0px;
   font-family: 'Poppins', sans-serif;
 }
-.App{
+
+.App {
   display: flex;
   flex-direction: row;
   height: 100%;
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
 }
-.panel-container{
+
+.panel-container {
   background-color: rgb(33, 33, 33);
-  top:0;
+  top: 0;
   left: 0;
   height: 100%;
   width: 20rem;
   display: flex;
   flex-direction: column;
-  transition: width 0.5s;
+  transition: width 2s;
 }
 
-.panel-header > p {
-  margin: 0;
-  font-weight: 600;
-  height: min-content;
-  font-size: 32px;
-  color: white;
-}
 .panel-header {
   height: min-content;
   background-color: black;
@@ -43,13 +42,22 @@ body{
   text-align: center;
   padding-bottom: 15px;
   padding-top: 10px;
+
+  &>p {
+    margin: 0;
+    font-weight: 600;
+    height: min-content;
+    font-size: 32px;
+    color: white;
+  }
 }
 
-#Pomo{
+#Pomo {
   border-radius: 10px;
 }
-#Hub{
-  background-color: #fe9800 ;
+
+#Hub {
+  background-color: #fe9800;
   color: black;
   padding-left: 5px;
   padding-right: 5px;
@@ -57,21 +65,21 @@ body{
   position: relative;
   left: 4px;
 }
-.panel-content{
+
+.panel-content {
   border-top: 2px solid white;
   flex-grow: 12;
   height: max-content;
 }
-.panel-footer{
+
+.panel-footer {
   flex-grow: 1.5;
   height: max-content;
   font-weight: 600;
   color: white;
 }
-.panel-footer > .menu-list > .menu-item{
-  background-color: rgb(0, 0, 0);
-}
-.menu-list{
+
+.menu-list {
   position: relative;
   top: 1.5rem;
   font-weight: 600;
@@ -83,7 +91,8 @@ body{
   padding: 0;
   gap: 15px;
 }
-.menu-item{
+
+.menu-item {
   cursor: pointer;
   background-color: #626262;
   display: flex;
@@ -95,25 +104,28 @@ body{
   border-radius: 0.4rem;
   padding-left: 0.8rem;
   gap: 0.5rem;
-  transition: display 2s;
-}
-.menu-item:hover{
-  background-color: #6262628f;
-}
-.menu-icon{
-  padding: 0;
-  height: 1.8rem;
-  filter: invert();
-}
-.timer-icon-header{
-  padding: 0;
-  height: 1.8rem;
-  filter: invert();
-  position: relative;
-  bottom: 8px
+  white-space: nowrap;
+
+  &:hover {
+    background-color: #6262628f;
+  }
 }
 
-.width-adjuster{
+.menu-icon {
+  padding: 0;
+  height: 1.8rem;
+  filter: invert(100%);
+}
+
+
+.timer-icon-header {
+  padding: 0;
+  height: 1.8rem;
+  position: relative;
+  bottom: 8px;
+}
+
+.width-adjuster {
   height: 100%;
   width: 8px;
   position: relative;
@@ -122,7 +134,8 @@ body{
   justify-content: center;
   left: 0px;
 }
-.width-line{
+
+.width-line {
   cursor: pointer;
   background-color: #999999;
   border-radius: 100px;
@@ -130,10 +143,14 @@ body{
   left: 10px;
   height: 30px;
   width: 100px;
-  transition: background-color 0.1s;
-}
-.collapse > p {
-  display: none;
-  
 }
 
+.collapse {
+  
+  width: 80px;
+  .menu-item p{
+    transition: display 0.6s;
+    display: none;
+  }
+  
+}
