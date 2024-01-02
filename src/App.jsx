@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react'
 import "./App.scss"
 import { PanelContextProvider } from './contexts/PanelContextProvider'
 import { SidePanel } from './components/SidePanel'
+import PomodoroTimer from './components/PomodoroTimer'
 
 export default function App() {
   return (
@@ -9,10 +10,7 @@ export default function App() {
       <PanelContextProvider>
         <SidePanel></SidePanel>
       </PanelContextProvider>
-      <div>
-        TIME GOES HERE
-      </div>
-
+      <PomodoroTimer></PomodoroTimer>
     </div>
 
   )
