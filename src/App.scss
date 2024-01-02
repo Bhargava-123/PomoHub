@@ -2,9 +2,10 @@
   font-family: 'Poppins';
   src: local('Poppins'), url(./assets/Poppins/) format('ttf');
 }
-
-@mixin collapsed{
-  @container 
+@container (max-width: 80px){
+  .panel-header{
+    background-color: "red";
+  }
 }
 body {
   margin: 0px;
@@ -21,19 +22,23 @@ body {
 }
 
 .panel-container {
-  background-color: rgb(33, 33, 33);
+  .collapsed{
+    display: none;
+  }
+  background-color: #212121;
   top: 0;
   left: 0;
   height: 100%;
   width: 20rem;
   display: flex;
   flex-direction: column;
-  transition: width 2s;
+  transition: width 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.panel-header {
+.panel-header{
+  transition: all .6s;
   height: min-content;
-  background-color: black;
+  background-color: #141414;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -42,7 +47,6 @@ body {
   text-align: center;
   padding-bottom: 15px;
   padding-top: 10px;
-
   &>p {
     margin: 0;
     font-weight: 600;
@@ -122,6 +126,8 @@ body {
   padding: 0;
   height: 1.8rem;
   position: relative;
+  left: 0px;
+  filter: invert(100%);
   bottom: 8px;
 }
 
@@ -145,8 +151,14 @@ body {
   width: 100px;
 }
 
-.collapse {
-  
+.panel-container.collapse {
+  .expanded{
+    display: none;
+  }
+  .collapsed{
+    display: flex;
+    margin-left: -4px;
+  }
   width: 80px;
   .menu-item p{
     transition: display 0.6s;
