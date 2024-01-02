@@ -13,7 +13,7 @@ export const SidePanel = () => {
 
     const { collapse, handleCollapse, handleTodoList } = useContext(PanelContext);
     return (
-        <div className="App">
+        <>
             <div className={`panel-container ${!collapse ? "collapse" : ""}`} ref={panelRef}>
                 <PanelHeader></PanelHeader>
                 <CollapsedPanelHeader></CollapsedPanelHeader>
@@ -49,6 +49,7 @@ export const SidePanel = () => {
                 <div className='width-line' onClick={handleCollapse}>
                 </div>
             </div>
-        </div>
+        </>
+
     )
 }
