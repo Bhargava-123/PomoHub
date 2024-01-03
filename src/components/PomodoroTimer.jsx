@@ -9,26 +9,34 @@ import stopIcon from "../assets/stop.svg";
 import { useTimer } from '@mzaleski/use-timer';
 
 export const PomodoroTimer = () => {
-    const { timeRemaining, secondsRemaining, setFreeze, resetTimer,isFrozen } = useTimer(65, false,
+    const { timeRemaining, secondsRemaining, setFreeze, resetTimer,isFrozen } = useTimer(60, true,
         () => console.log('Timer finished!')
     );
 
     let timeObj = new Date(secondsRemaining * 1000);
     var minutes = timeObj.getUTCMinutes()
     var seconds = timeObj.getSeconds();
-    console.log(minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0'));
-    return (
-        <div className='timer-container=container'>
-            <div className="timer-container">
-                <div>{minutes.toString().padStart(2,'0')}</div>
-                <div className="button-container">
-                    <div className="pause-play-icon">
 
-                        {/* <img src={isFrozen ? playIcon : pauseIcon} alt=""  />
-                        <img src={stopIcon} alt="" /> */}
+    const handleTimerState = () => {
+        isFrozen ? setFreeze(false) : setFreeze(true);
+    }
+    return (
+        <div className='timer-content-container'>
+            <div className="timer-container">
+                <div className='minutes-container'>{minutes.toString().padStart(2, '0')}</div>
+                
+                <div className="button-container">
+                    <div onClick={() => handleTimerState()} className="pause-play-icon">
+                        <img src={isFrozen ? playIcon : pauseIcon} alt=""  />
+                    </div>
+                    <div onClick={() => resetTimer(true)} className="pause-play-icon">
+                        <img src={stopIcon} alt="" />
+                    </div>
+                    <div className='pause-play-icon'>
                     </div>
                 </div>
-                <div>{ minutes.toString().padStart(2,'0') }</div>
+
+                <div className='seconds-container'>{ seconds.toString().padStart(2,'0') }</div>
             </div>
         </div>
     );
