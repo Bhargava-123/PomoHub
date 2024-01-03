@@ -11,10 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mzaleski/use-timer": "^1.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-resizable": "^3.0.5",
-    "react-timer-hook": "^3.0.7",
     "scss": "^0.2.4"
   },
   "devDependencies": {
