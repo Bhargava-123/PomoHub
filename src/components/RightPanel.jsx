@@ -1,13 +1,20 @@
-import React, { useEffect, useRef,useState } from 'react'
+import React, { useContext, useEffect, useRef,useState } from 'react'
 import "../assets/css/RightPanel.scss"
-
+import { TimerContext } from '../contexts/TimerContextProvider';
 export default function RightPanel() {
 
     const [collapse, setCollapse] = useState(true);
     const rightPanelRef = useRef();
 
+    const { setTimerMode } = useContext(TimerContext);
+
     const handleCollapse = () => {
         collapse == true ? setCollapse(false) : setCollapse(true);
+    }
+
+    const handleTimerMode = (mode) => {
+        console.log(mode);
+        setTimerMode(mode);
     }
 
     return (
@@ -22,13 +29,13 @@ export default function RightPanel() {
 
             <div className={`right-panel-button-container
              ${collapse ? "right-collapse" : ""} `} ref={rightPanelRef}>
-                <div className="mode-container work">
+                <div className="mode-container work" onClick={() => handleTimerMode("work-mode")}>
                     <h5>Work Mode</h5>
                 </div>
-                <div className="mode-container short-break">
+                <div className="mode-container short-break" onClick={() => handleTimerMode("short-break")}>
                     <h5>Short Break</h5>
                 </div>
-                <div className="mode-container long-break">
+                <div className="mode-container long-break" onClick={() => handleTimerMode("long-break")}>
                     <h5>Long Break</h5>
                 </div>
             </div>

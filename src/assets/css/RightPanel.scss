@@ -57,29 +57,24 @@ $blue: rgb(0, 14, 163);
     &:hover{
         cursor: pointer;
     }
-    transition: flex-grow 0.4s ease-out;
+    transition: flex-grow 0.2s ease-in-out;
 }
 
 @mixin lighten($color){
     background-color: adjust-color($color: $color , $hue: 0, $saturation: 0%, $lightness: 10%, $alpha: 1.0);
     flex-grow: 2;
-    
 }
 .work{
     background-color: $red;
     &:hover{
-        border-bottom: 10px solid black;
         @include lighten($red);
     }
-    
     flex-grow: 1;
 }
 .long-break{
     background: $green;
     flex-grow: 1;
     &:hover {
-            border-top: 10px solid black;
-            
             @include lighten($green);
         }
 }
@@ -88,8 +83,6 @@ $blue: rgb(0, 14, 163);
     background-color: $blue;
     flex-grow: 1;
     &:hover {
-            border-bottom: 10px solid black;
-            border-top: 10px solid black;
             @include lighten($blue);
         }
 }
