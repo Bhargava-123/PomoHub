@@ -6,6 +6,7 @@ import todoList from "../assets/todoList.svg"
 import settings from "../assets/settings.svg"
 import { PanelHeader } from '../components/PanelHeader'
 import { CollapsedPanelHeader } from '../components/CollapsedPanelHeader'
+import TodoList from "./TodoList";
 
 export const SidePanel = () => {
     const panelRef = useRef();
@@ -32,6 +33,7 @@ export const SidePanel = () => {
                             <img src={todoList} className='menu-icon' alt="" />
                             <p>To-Do List</p>
                         </li>
+                        <TodoList></TodoList>
                     </ul>
 
                 </div>
