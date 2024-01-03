@@ -19,7 +19,7 @@ export default function TimerContextProvider({ children }) {
             setInitialTimer(timerSetting[timerMode])
     },[timerMode])
 
-    const { timeRemaining, secondsRemaining, setFreeze, resetTimer, isFrozen } =
+    const { secondsRemaining, setFreeze, resetTimer, isFrozen } =
     useTimer(initialTimer*60, true,
         () => console.log('Timer finished!')
     );
@@ -32,7 +32,7 @@ export default function TimerContextProvider({ children }) {
         isFrozen ? setFreeze(false) : setFreeze(true);
     }
 
-   const stateObjects = {minutes,seconds,handleTimerState,resetTimer,isFrozen,setTimerMode}
+   const stateObjects = {minutes,seconds,handleTimerState,resetTimer,isFrozen,setTimerMode,initialTimer,secondsRemaining}
     return (
         <TimerContext.Provider value={stateObjects}>
             {children}
