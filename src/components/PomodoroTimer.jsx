@@ -1,15 +1,17 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect,useRef,useState } from 'react'
 import { useTimer } from 'react-timer-hook';
 import pauseIcon from "../assets/pause.svg";
 import playIcon from "../assets/play.svg";
 import "../assets/css/PomodoroTimer.scss";
 import stopIcon from "../assets/stop.svg";
+import { TimerContext } from '../contexts/TimerContextProvider';
+//STATES THAT NEED LOCALLY
 
-//WHAT TO DO WHEN THE TIMER ENDS ? RESET THE ORIGINAL EXPIRY TIME / GO TO BREAK /
+//STATES THAT NEED GOLBALLY
 
-import { useState } from 'react';
-function MyTimer({ expiryTimestamp, workTime }) {
 
+
+function MyTimer({ expiryTimestamp, timerOffset }) {
 
     const {
         minutes,
@@ -22,10 +24,13 @@ function MyTimer({ expiryTimestamp, workTime }) {
 
     const [timerState, setTimerState] = useState("pause");
 
+    const progressBarRef = useRef();
+
     useEffect(() => {
         timerState === "resume" ? resume() : pause();
-        console.log(expiryTimestamp);
-    },[timerState])
+        var progress = 1 - ((minutes * 60 + seconds) / (timerOffset * 60));
+        progressBarRef.current.style.width = `${progress * 100}%`;
+    },[timerState,seconds,timerOffset])
 
     const handleTimerState = () => {
         if (timerState == "pause") {
@@ -37,9 +42,9 @@ function MyTimer({ expiryTimestamp, workTime }) {
     }
 
     const handleRestart = () => {
-        const time = new Date();
-        time.setMinutes(time.getMinutes() + workTime);
-        restart(time, false);
+        const newTimeStamp = new Date();
+        newTimeStamp.setMinutes(newTimeStamp.getMinutes() + timerOffset);
+        restart(newTimeStamp, false);
         setTimerState("pause");
     }
 
@@ -58,30 +63,23 @@ function MyTimer({ expiryTimestamp, workTime }) {
                     {seconds.toString().padStart(2, '0')}
                 </div>
             </div>
-            
-            
-            {/* <button onClick={() => pause()}>Pause</button>
-             */}
-            {/* <button onClick={() => {
-                // Restarts to 5 minutes timer
-                const time = new Date();
-                time.setSeconds(0);
-                restart(time,false)
-            }}>Reset</button> */}
+            <div className="progress-bar-container">
+                <div className="progress-bar" ref={progressBarRef}>
+                </div>
+            </div>
+    
         </div>
     );
 }
 
 export default function PomodoroTimer() {
-    const time = new Date();
 
-    const workTime = 10;
-
-    time.setMinutes(time.getMinutes()+workTime);
-    console.log(time);
+    const { timerOffset,expiryTimestamp } = useContext(TimerContext);
     return (
         <div className='timer-content-container'>
-            <MyTimer expiryTimestamp={time} workTime = {workTime} />
+            <MyTimer expiryTimestamp={expiryTimestamp} timerOffset={timerOffset} />
+            <h2>{timerOffset}</h2>
+            <h2>{expiryTimestamp}</h2>
         </div>
     );
 }

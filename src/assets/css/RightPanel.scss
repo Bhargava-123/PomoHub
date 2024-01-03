@@ -1,6 +1,10 @@
 $red : rgb(186, 0, 0);
 $green: rgb(0, 160, 8);
 $blue: rgb(0, 14, 163);
+$black-bg: rgb(33, 31, 31);
+$black-hd: black;
+$yellow-hd: #fe9800;
+$grey-btn-bg: #626262;
 
 .right-panel-container{
     display: flex;
@@ -10,7 +14,7 @@ $blue: rgb(0, 14, 163);
 .width-control-container{
     display: flex;
     align-items: center;
-    background-color: #1f1f1f;
+    background-color: $black-bg;
     padding-right: 10px;
     width: 100px;
     justify-content: flex-end;
@@ -22,12 +26,13 @@ $blue: rgb(0, 14, 163);
     .width-control{
         display: none;
         cursor: pointer;
-        background-color: rgb(71, 71, 71);
+        background-color: $grey-btn-bg;
         width: 8px;
         height: 30px;
         border-radius: 20px;
+        filter: opacity(20%);
         &:hover{
-            background-color: rgb(154, 154, 154);
+            filter: opacity(100%);
         }
         
     }
@@ -68,7 +73,6 @@ $blue: rgb(0, 14, 163);
 .work{
     background-color: $red;
     &:hover{
-        border-bottom: 10px solid black;
         @include lighten($red);
     }
     
@@ -78,8 +82,6 @@ $blue: rgb(0, 14, 163);
     background: $green;
     flex-grow: 1;
     &:hover {
-            border-top: 10px solid black;
-            
             @include lighten($green);
         }
 }
@@ -88,8 +90,6 @@ $blue: rgb(0, 14, 163);
     background-color: $blue;
     flex-grow: 1;
     &:hover {
-            border-bottom: 10px solid black;
-            border-top: 10px solid black;
             @include lighten($blue);
         }
 }

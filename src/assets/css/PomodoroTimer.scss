@@ -1,3 +1,8 @@
+$black-bg: rgb(33, 31, 31);
+$black-hd: black;
+$yellow-hd: #fe9800;
+$grey-btn-bg: #626262;
+
 .pause-play-icon {
     height: 7rem;
     filter: invert(100%);
@@ -7,6 +12,7 @@
     color: white;
     background-color: #1f1f1f;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-grow: 1;
@@ -31,5 +37,21 @@
     font-variant-numeric: tabular-nums;
     font-family:monospace;
     gap: 0.5rem;
+}
 
+.progress-bar-container{
+    height: 5px;
+    width: 100%;
+    background-color: rgb(31, 31, 31);
+    position: absolute;
+    bottom:0;
+    left: 0;
+    &>*{
+        background-color: green;
+        width: 0%;
+        height: 5px;
+        transition: width 1s;
+        transition-timing-function: linear;
+
+    }
 }

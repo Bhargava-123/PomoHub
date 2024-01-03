@@ -6,7 +6,7 @@ export const CollapsedPanelHeader = () => {
             P
         </p>
         <p id="Hub">
-             <img src={timer} className="timer-icon-header" alt="" />
+             H
         </p>
     </div>
     )

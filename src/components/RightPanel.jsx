@@ -1,9 +1,11 @@
-import React, { useEffect, useRef,useState } from 'react'
+import React, { useEffect, useRef,useState,useContext } from 'react'
 import "../assets/css/RightPanel.scss"
+import { TimerContext } from '../contexts/TimerContextProvider';
 
 export default function RightPanel() {
 
     const [collapse, setCollapse] = useState(true);
+    const { setTimerMode } = useContext(TimerContext);
     const rightPanelRef = useRef();
 
     const handleCollapse = () => {
@@ -22,13 +24,21 @@ export default function RightPanel() {
 
             <div className={`right-panel-button-container
              ${collapse ? "right-collapse" : ""} `} ref={rightPanelRef}>
-                <div className="mode-container work">
+                <div className="mode-container work" onClick={
+                    () => setTimerMode("work-mode")
+                }>
                     <h5>Work Mode</h5>
                 </div>
-                <div className="mode-container short-break">
+                <div className="mode-container short-break"
+                    onClick={
+                        () => setTimerMode("short-break")
+                    }
+                >
                     <h5>Short Break</h5>
                 </div>
-                <div className="mode-container long-break">
+                <div className="mode-container long-break"
+                    onClick={() => setTimerMode("long-break")}
+                >
                     <h5>Long Break</h5>
                 </div>
             </div>

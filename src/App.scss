@@ -3,6 +3,12 @@
   src: local('Poppins'), url(./assets/Poppins/) format('ttf');
 }
 
+$black-bg: rgb(33, 31, 31);
+$black-hd: black;
+$yellow-hd: #fe9800;
+$grey-btn-bg: #626262;
+
+
 body {
   margin: 0px;
   font-family: 'Poppins', sans-serif;
@@ -23,7 +29,7 @@ body {
   .collapsed{
     display: none;
   }
-  background-color: #212121;
+  background-color: $black-bg;
   top: 0;
   left: 0;
   height: 100%;
@@ -37,7 +43,7 @@ body {
 .panel-header{
   transition: all .6s;
   height: min-content;
-  background-color: #141414;
+  background-color: $black-hd;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -46,6 +52,7 @@ body {
   text-align: center;
   padding-bottom: 15px;
   padding-top: 10px;
+ 
   &>p {
     margin: 0;
     font-weight: 600;
@@ -60,8 +67,8 @@ body {
 }
 
 #Hub {
-  background-color: #fe9800;
-  color: black;
+  background-color: $yellow-hd;
+  color: $black-hd;
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 10px;
@@ -97,7 +104,7 @@ body {
 
 .menu-item {
   cursor: pointer;
-  background-color: #626262;
+  background-color: $grey-btn-bg;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -138,7 +145,7 @@ body {
   align-items: center;
   justify-content: center;
   left: 0px;
-  background-color: #1f1f1f;
+  background-color: $black-bg;
   width: 8px;
 }
 
@@ -147,7 +154,7 @@ body {
     filter: opacity(100%);
   }
   cursor: pointer;
-  background-color: #999999;
+  background-color: $grey-btn-bg;
   filter:opacity(20%);
   border-radius: 100px;
   position: relative;
@@ -163,6 +170,7 @@ body {
   }
   .collapsed{
     display: flex;
+    gap: 2px;
     margin-left: -4px;
     img{
       filter: invert(0%);
