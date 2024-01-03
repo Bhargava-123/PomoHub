@@ -62,7 +62,7 @@ $grey-btn-bg: #626262;
     &:hover{
         cursor: pointer;
     }
-    transition: flex-grow 0.4s ease-out;
+    transition: flex-grow 0.1s linear;
 }
 
 @mixin lighten($color){

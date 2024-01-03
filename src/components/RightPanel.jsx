@@ -12,20 +12,25 @@ export default function RightPanel() {
         collapse == true ? setCollapse(false) : setCollapse(true);
     }
 
+    const handleTimerMode = (mode) => {
+        if (mode == "work-mode") {
+            setTimerMode("work-mode")
+        }
+        console.log(mode);
+    }
+
     return (
         <div className='right-panel-container' >
 
             <div className="width-control-container">
                 <div className="width-control" onClick={() => handleCollapse()}>
-
                 </div>
-
             </div>
 
             <div className={`right-panel-button-container
              ${collapse ? "right-collapse" : ""} `} ref={rightPanelRef}>
                 <div className="mode-container work" onClick={
-                    () => setTimerMode("work-mode")
+                    () => handleTimerMode("work-mode")
                 }>
                     <h5>Work Mode</h5>
                 </div>
