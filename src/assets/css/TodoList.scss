@@ -17,12 +17,23 @@ $grey-btn-bg: #626262;
     width: calc(100% - 38px);
     align-items: center;
     border-radius: 0.4rem;
-    padding-left: 0.8rem;
     gap: 0.5rem;
+    white-space: nowrap;
+    .checkBox{
+        padding-left: 6px;
+        padding-top: 7px;
+    }
+}
+.checkBox-container{
+    cursor: pointer;
+}
+.checkBox{
+    padding: 0;
+    height: 1.8rem;
+    filter: invert(100%);
 }
 .todo-list-container.collapse{
     &> .todo-container > .todo-task-name{
         display: none;
     }
 }
-
