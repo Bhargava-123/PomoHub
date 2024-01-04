@@ -4,6 +4,9 @@ import analyticsIcon from "../assets/analytics.svg"
 import timer from "../assets/timer.svg"
 import todoList from "../assets/todoList.svg"
 import settings from "../assets/settings.svg"
+import arrowExpand from "../assets/todo-list-logos/arrowExpand.svg"
+
+
 import { PanelHeader } from '../components/PanelHeader'
 import { CollapsedPanelHeader } from '../components/CollapsedPanelHeader'
 import TodoList from "./TodoList";
@@ -11,8 +14,22 @@ import TodoList from "./TodoList";
 export const SidePanel = () => {
     const panelRef = useRef();
     const collapseButtonRef = useRef();
+    const arrowIconRef = useRef();
 
     const { collapse, handleCollapse, handleTodoList } = useContext(PanelContext);
+
+    const handleTodoExpand = () => {
+        if (arrowIconRef.current.className.includes("expanded")) {
+            arrowIconRef.current.style.transform = "rotate(90deg)";
+            arrowIconRef.current.className = "arrow-icon";
+        }
+        else {
+            arrowIconRef.current.style.transform = "rotate(0deg)"
+            arrowIconRef.current.className = "arrow-icon expanded";
+            
+        }
+        
+    }
     return (
         <>
             <div className={`panel-container ${!collapse ? "collapse" : ""}`} ref={panelRef}>
@@ -32,6 +49,9 @@ export const SidePanel = () => {
                         <li className="menu-item" onClick={handleTodoList}>
                             <img src={todoList} className='menu-icon' alt="" />
                             <p>To-Do List</p>
+                            <div className="arrow-icon-container" onClick={handleTodoExpand}>
+                                <img src={arrowExpand} ref={ arrowIconRef } className="arrow-icon" alt="" />
+                            </div>
                         </li>
                         <TodoList></TodoList>
                     </ul>

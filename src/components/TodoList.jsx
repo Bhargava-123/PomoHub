@@ -3,6 +3,7 @@ import "../assets/css/TodoList.scss"
 import { PanelContext } from '../contexts/PanelContextProvider'
 import checkBoxEmpty from "../assets/todo-list-logos/checkBoxEmpty.svg"
 import checkBoxChecked from "../assets/todo-list-logos/checkBoxChecked.svg"
+import todoOption from "../assets/todo-list-logos/todoOption.svg"
 
 
 export const Todo = ({ handleCheckBox, taskName }) => {
@@ -17,6 +18,9 @@ export const Todo = ({ handleCheckBox, taskName }) => {
             <div className="todo-task-name">
                 {taskName}
             </div>
+            <div className="todo-option-container">
+                <img src={todoOption} className = "todo-option" alt="" />
+            </div>
         </div>
    )
 }
@@ -25,7 +29,6 @@ export const Todo = ({ handleCheckBox, taskName }) => {
 export default function TodoList() {
 
     const { collapse } = useContext(PanelContext);
-    const todoContainerRef = useRef([]);
 
     const handleCheckBox = (todoContainerRef) => {
         console.log(todoContainerRef.current); 
@@ -58,7 +61,7 @@ export default function TodoList() {
                 {
                     todoTaskList.map((value, key) => {
                         return (
-                            <Todo
+                            <Todo key = {key}
                                 taskName={value.taskName}
                                 handleCheckBox={handleCheckBox}
                             ></Todo>

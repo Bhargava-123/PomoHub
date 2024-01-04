@@ -118,15 +118,37 @@ body {
     background-color: #6262628f;
   }
   p{
+    flex-grow: 1;
     transition: opacity 0.1s ease-in-out;
   }
 }
 
-.menu-icon {
-  padding-left: 6px;
+@mixin icon{
   height: 1.8rem;
   filter: invert(100%);
 }
+
+.menu-icon {
+    @include icon;
+    padding-left: 6px;
+}
+
+.arrow-icon-container{
+  height: 1.32rem;
+}
+.arrow-icon{
+  @include icon;
+  height: 1.32rem;
+  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+  &.expand{
+      transform: rotate(90deg);
+  }
+  position: relative;
+  right: 0.5rem;
+
+}
+
+
 
 
 .timer-icon-header {
@@ -189,6 +211,9 @@ body {
   .menu-item p{
     opacity: 0;
     display: none; 
+  }
+  .arrow-icon{
+    display: none;
   }
   
 }

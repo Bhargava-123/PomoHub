@@ -12,7 +12,7 @@ export const PanelContextProvider = ({ children }) => {
     }
 
     const handleTodoList = () => {
-        setCollapse(!collapse)
+        // setCollapse(!collapse)
     }
 
     const statesObj = {collapse,handleCollapse,handleTodoList}
