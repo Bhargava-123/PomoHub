@@ -9,6 +9,7 @@ $grey-btn-bg: #626262;
 }
 
 .todo-container{
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
     width: calc(100% - 28px);
@@ -17,11 +18,22 @@ $grey-btn-bg: #626262;
     width: calc(100% - 38px);
     align-items: center;
     border-radius: 0.4rem;
+    
     gap: 0.5rem;
-    white-space: nowrap;
     .checkBox{
         padding-left: 6px;
         padding-top: 7px;
+    }
+    .todo-task-name{
+        white-space: normal;
+        flex-wrap: wrap;
+        transition: opacity 0.1s cubic-bezier(.39, 1.8, .13, 1.87);
+    }
+    
+}
+.todo-container.checked{
+    .todo-task-name{
+        text-decoration: line-through;
     }
 }
 .checkBox-container{
@@ -34,6 +46,7 @@ $grey-btn-bg: #626262;
 }
 .todo-list-container.collapse{
     &> .todo-container > .todo-task-name{
-        display: none;
+        // display: none;
+        opacity: 0;
     }
 }
