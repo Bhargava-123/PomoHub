@@ -4,7 +4,7 @@ $grey-btn-bg: #626262;
     filter: invert(100%);
 }
 .todo-list-container{
-    width: calc(100%);
+    width: calc(100% - 38px);
     border-radius: 0.4rem;
     display: flex;
     flex-direction: column;
@@ -16,22 +16,24 @@ $grey-btn-bg: #626262;
     flex-grow: 1;
     display: flex;
     flex-direction: row;
-    width: calc(100% - 28px);
+    gap: 0.5rem;
     background-color: $grey-btn-bg;
-    width: calc(100% - 38px);
     align-items: center;
+    width: 100%;
     justify-content: space-between;
     border-radius: 0.4rem;
-    gap: 0.5rem;
     .checkBox{
         padding-left: 6px;
         padding-top: 7px;
     }
     .todo-task-name{
-        // min-width: max-content;
-        max-width: max-content;
         white-space: nowrap;
-        // word-wrap: break-word;
+        width: 100%;
+        //text over flow
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        //text over flow
         transition: opacity 0.1s cubic-bezier(.39, 1.8, .13, 1.87);
     }
     
@@ -65,8 +67,20 @@ $grey-btn-bg: #626262;
         display: none;
     }
     &> .todo-container > .todo-task-name{
-        // display: none;
+        display: none;
         opacity: 0;
     }
 }
 
+.context-menu-container{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: absolute;
+    &.popup {
+        display: inline;
+    }
+    &.hide{
+        display: none;
+    }
+}

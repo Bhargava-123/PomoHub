@@ -67,7 +67,7 @@ $grey-btn-bg: #626262;
 
 @mixin lighten($color){
     background-color: adjust-color($color: $color , $hue: 0, $saturation: 0%, $lightness: 10%, $alpha: 1.0);
-    flex-grow: 2;
+    flex-grow: 1.2;
 }
 .work{
     background-color: $red;

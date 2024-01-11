@@ -5,10 +5,27 @@ import checkBoxEmpty from "../assets/todo-list-logos/checkBoxEmpty.svg"
 import checkBoxChecked from "../assets/todo-list-logos/checkBoxChecked.svg"
 import todoOption from "../assets/todo-list-logos/todoOption.svg"
 
-
-export const Todo = ({ handleCheckBox, taskName }) => {
+export const Todo = ({ handleCheckBox, taskName}) => {
     
     const todoContainerRef = useRef();
+    const contextMenuRef = useRef();
+
+    
+    const handleOption = (e) => {
+        let x = e.clientX;
+        let y = e.clientY + 100;
+        let contextMenuClassName = "context-menu-container"
+        console.log(e.clientX,e.clientY);
+        if (contextMenuRef.current.className.includes("hide")) {
+            contextMenuRef.current.className = contextMenuClassName+" popup";
+            contextMenuRef.current.style.left = `${x}}px`;
+            contextMenuRef.current.style.right = `${y}px`;
+        }
+        else {
+           contextMenuRef.current.className = contextMenuClassName+" hide"
+        }
+        
+    }
 
     return (
         <div className="todo-container empty" ref = {todoContainerRef}>
@@ -18,12 +35,19 @@ export const Todo = ({ handleCheckBox, taskName }) => {
             <div className="todo-task-name">
                 {taskName}
             </div>
-            <div className="todo-option-container">
+            <div className="todo-option-container" onClick={(e) => handleOption(e)}>
                 <img src={todoOption} className = "todo-option" alt="" />
             </div>
+            
+
+            <div className="context-menu-container hide" ref = {contextMenuRef}>
+                <h6>Delete</h6>
+                <h6>Edit</h6>
+            </div>
         </div>
-   )
+    )  
 }
+
 
 
 export default function TodoList() {
@@ -46,7 +70,7 @@ export default function TodoList() {
 
     const todoTaskList = [
         {
-            taskName: "Study Compiler Design",
+            taskName: "Study Compiler Design asldkfj",
             isCompleted: false,
 
         },
@@ -68,7 +92,6 @@ export default function TodoList() {
                         )
                     })
                 }
-                
             </div>
         )
 }
