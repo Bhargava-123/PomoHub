@@ -13,6 +13,7 @@ $grey-btn-bg: #626262;
 }
 
 .todo-container{
+    width: 100%;
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -34,7 +35,7 @@ $grey-btn-bg: #626262;
         transition: opacity 0.1s cubic-bezier(.39, 1.8, .13, 1.87);
     }
     &:hover{
-        background-color: black;
+        background-color: rgb(79, 79, 79);
         &>.todo-option-container{
             visibility: visible;
         }
@@ -77,11 +78,39 @@ $grey-btn-bg: #626262;
 }
 
 .context-menu-container{
-    background-color: #b3b3b3;
+    background-color: #464444;
     border-radius: 8px;
-    padding: 12px;
-    div{
-        color: black;
-        font-size: 0.8rem;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.context-menu-option{
+    &:hover{
+        background-color: #8686868e;
     }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 16px;
+    padding-right: 16px;
+    &.delete{
+        color: #ff0000;
+    }
+    .icon-container{
+        display: flex;
+        align-items: center;
+        .editIcon{
+            @include icon;
+            height: 1.4rem;
+        }
+        .deleteIcon{
+            height: 1.4rem;
+        }
+    }
+    
 }

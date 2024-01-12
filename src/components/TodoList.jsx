@@ -11,26 +11,36 @@ export const Todo = ({ handleCheckBox, taskName }) => {
 
     const initialContextMenu = {
         show: false,
-        x: 0,
+        x: 250,
         y: 0,
     }
     
     const todoContainerRef = useRef(null);
     const [rect, setRect] = useState();
     useEffect(() => {
+        document.addEventListener("click", handleClickOutside, true);
         console.log(todoContainerRef.current.getBoundingClientRect());
         if (todoContainerRef.current) {
             const rect = todoContainerRef.current.getBoundingClientRect();
             setRect(rect);
         }
     }, [])
-    
+    const handleClickOutside = (e) => {
+        if (!todoContainerRef.current.contains(e.target)) {
+            console.log("CLICKED OUTSIDE");
+            setContextMenu({ show: false });
+        }
+        else {
+            console.log("CLICKED INSIDE");
+        }
+    }
+
     const [contextMenu, setContextMenu] = useState(initialContextMenu);
 
     const handleContextMenu = (e) => {
         console.log("SHOW CONTEXT MENU");
         const { pageX, pageY } = e;
-        setContextMenu({show: true,x: rect.x+230, y: rect.y-120})
+        setContextMenu({show: true,x: rect.x+312, y: rect.y-120})
     }
 
     return (
