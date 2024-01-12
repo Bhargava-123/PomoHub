@@ -1,30 +1,36 @@
-import React, { forwardRef, useContext,useRef } from 'react'
+import React, { forwardRef, useContext,useRef,useState,useEffect } from 'react'
 import "../assets/css/TodoList.scss"
 import { PanelContext } from '../contexts/PanelContextProvider'
 import checkBoxEmpty from "../assets/todo-list-logos/checkBoxEmpty.svg"
 import checkBoxChecked from "../assets/todo-list-logos/checkBoxChecked.svg"
 import todoOption from "../assets/todo-list-logos/todoOption.svg"
+import ContextMenu from './ContextMenu'
 
-export const Todo = ({ handleCheckBox, taskName}) => {
-    
-    const todoContainerRef = useRef();
-    const contextMenuRef = useRef();
 
+export const Todo = ({ handleCheckBox, taskName }) => {
+
+    const initialContextMenu = {
+        show: false,
+        x: 0,
+        y: 0,
+    }
     
-    const handleOption = (e) => {
-        let x = e.clientX;
-        let y = e.clientY + 100;
-        let contextMenuClassName = "context-menu-container"
-        console.log(e.clientX,e.clientY);
-        if (contextMenuRef.current.className.includes("hide")) {
-            contextMenuRef.current.className = contextMenuClassName+" popup";
-            contextMenuRef.current.style.left = `${x}}px`;
-            contextMenuRef.current.style.right = `${y}px`;
+    const todoContainerRef = useRef(null);
+    const [rect, setRect] = useState();
+    useEffect(() => {
+        console.log(todoContainerRef.current.getBoundingClientRect());
+        if (todoContainerRef.current) {
+            const rect = todoContainerRef.current.getBoundingClientRect();
+            setRect(rect);
         }
-        else {
-           contextMenuRef.current.className = contextMenuClassName+" hide"
-        }
-        
+    }, [])
+    
+    const [contextMenu, setContextMenu] = useState(initialContextMenu);
+
+    const handleContextMenu = (e) => {
+        console.log("SHOW CONTEXT MENU");
+        const { pageX, pageY } = e;
+        setContextMenu({show: true,x: rect.x+230, y: rect.y-120})
     }
 
     return (
@@ -35,15 +41,12 @@ export const Todo = ({ handleCheckBox, taskName}) => {
             <div className="todo-task-name">
                 {taskName}
             </div>
-            <div className="todo-option-container" onClick={(e) => handleOption(e)}>
-                <img src={todoOption} className = "todo-option" alt="" />
+            <div className="todo-option-container">
+                <img src={todoOption} className="todo-option" alt=""
+                    onClick={(e) => handleContextMenu(e)}
+                />
             </div>
-            
-
-            <div className="context-menu-container hide" ref = {contextMenuRef}>
-                <h6>Delete</h6>
-                <h6>Edit</h6>
-            </div>
+            <ContextMenu show={contextMenu.show} x={contextMenu.x} y = {contextMenu.y}></ContextMenu>
         </div>
     )  
 }
@@ -78,6 +81,10 @@ export default function TodoList() {
             taskName: "Study Crypto",
             isCompleted: true,
         },
+        {
+            taskName: "STudy DSA",
+            isCompleted: false,
+        }
     ]
 
         return (
