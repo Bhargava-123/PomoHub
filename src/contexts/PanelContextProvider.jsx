@@ -5,14 +5,14 @@ export const PanelContext = createContext({});
 
 export const PanelContextProvider = ({ children }) => {
     
-    const [collapse, setCollapse] = useState(false);
+    const [collapse, setCollapse] = useState(true);
 
     const handleCollapse = () => {
         setCollapse(!collapse)
     }
 
     const handleTodoList = () => {
-        setCollapse(!collapse)
+        // setCollapse(!collapse)
     }
 
     const statesObj = {collapse,handleCollapse,handleTodoList}
