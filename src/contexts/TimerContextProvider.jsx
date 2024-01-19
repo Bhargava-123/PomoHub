@@ -14,7 +14,7 @@ export default function TimerContextProvider({ children }) {
     }
     const [timerMode, setTimerMode] = useState("work-mode");
     //BUG: TIMER SESSION RESETS ONCE WE RELOD THE PAGE
-    const [timerSession, setTimerSession] = useState(0);
+    const [timerSession, setTimerSession] = useState(0); //this is what we are working on.
     const [timerCompleted, setTimerCompleted] = useState(false);
     const [initialTimer, setInitialTimer] = useState(timerSetting["work-mode"]);
 
@@ -23,6 +23,18 @@ export default function TimerContextProvider({ children }) {
         console.log(timerSession);
     },[timerMode,timerSession])
 
+    //
+    useEffect(() => {
+        const data = window.localStorage.getItem('TIMER_SESSION_STATE');
+        console.log(data);
+        if ( data !== null ) setTimerSession(JSON.parse(data));
+      }, []);
+      
+    useEffect(() => {
+        window.localStorage.setItem('TIMER_SESSION_STATE', JSON.stringify(timerSession));
+      }, [timerSession]);
+    
+      //
     const { secondsRemaining, setFreeze, resetTimer, isFrozen } =
     useTimer(initialTimer*60, true,
         () => {
