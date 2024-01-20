@@ -17,6 +17,8 @@ export default function TimerContextProvider({ children }) {
     const [timerSession, setTimerSession] = useState(0); //this is what we are working on.
     const [timerCompleted, setTimerCompleted] = useState(false);
     const [initialTimer, setInitialTimer] = useState(timerSetting["work-mode"]);
+    const [editSession,setEditSession] = useState(false);
+    const [totalSession, setTotalSession] = useState(0);
 
     useEffect(() => {
         setInitialTimer(timerSetting[timerMode])
@@ -25,14 +27,19 @@ export default function TimerContextProvider({ children }) {
 
     //
     useEffect(() => {
-        const data = window.localStorage.getItem('TIMER_SESSION_STATE');
-        console.log(data);
-        if ( data !== null ) setTimerSession(JSON.parse(data));
+        const completed_data = window.localStorage.getItem('TIMER_SESSION_STATE');
+        const total_data = window.localStorage.getItem('TOTAL_SESSION_STATE');
+        if ( completed_data !== null ) {
+            setTimerSession(JSON.parse(completed_data));
+            setTotalSession(JSON.parse(total_data));
+
+        }
       }, []);
       
     useEffect(() => {
         window.localStorage.setItem('TIMER_SESSION_STATE', JSON.stringify(timerSession));
-      }, [timerSession]);
+        window.localStorage.setItem('TOTAL_SESSION_STATE', JSON.stringify(parseInt(totalSession)));
+      }, [timerSession,totalSession]);
     
       //
     const { secondsRemaining, setFreeze, resetTimer, isFrozen } =
@@ -65,7 +72,7 @@ export default function TimerContextProvider({ children }) {
         
     }
 
-   const stateObjects = {minutes,seconds,handleTimerState,resetTimer,isFrozen,setTimerMode,initialTimer,secondsRemaining,timerCompleted,setTimerCompleted,timerSession,localStorageReset}
+   const stateObjects = {minutes,seconds,handleTimerState,resetTimer,isFrozen,setTimerMode,initialTimer,secondsRemaining,timerCompleted,setTimerCompleted,timerSession,localStorageReset,editSession,setEditSession,totalSession, setTotalSession}
     return (
         <TimerContext.Provider value={stateObjects}>
             {children}
