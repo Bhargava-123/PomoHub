@@ -49,6 +49,11 @@ export default function TimerContextProvider({ children }) {
     var minutes = timeObj.getUTCMinutes()
     var seconds = timeObj.getSeconds();
 
+    const localStorageReset = (key) => {
+        window.localStorage.removeItem(key);
+        setTimerSession(0);
+    }
+
     const handleTimerState = () => {
         if (timerCompleted == false) {
             isFrozen ? setFreeze(false) : setFreeze(true);
@@ -60,7 +65,7 @@ export default function TimerContextProvider({ children }) {
         
     }
 
-   const stateObjects = {minutes,seconds,handleTimerState,resetTimer,isFrozen,setTimerMode,initialTimer,secondsRemaining,timerCompleted,setTimerCompleted,timerSession}
+   const stateObjects = {minutes,seconds,handleTimerState,resetTimer,isFrozen,setTimerMode,initialTimer,secondsRemaining,timerCompleted,setTimerCompleted,timerSession,localStorageReset}
     return (
         <TimerContext.Provider value={stateObjects}>
             {children}

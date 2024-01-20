@@ -3,6 +3,7 @@ import pauseIcon from "../assets/pause.svg";
 import playIcon from "../assets/play.svg";
 import "../assets/css/PomodoroTimer.scss";
 import stopIcon from "../assets/stop.svg";
+import reset from "../assets/reset.svg";
 import reloadIcon from "../assets/reload.svg";
 import { TimerContext } from '../contexts/TimerContextProvider';
 
@@ -12,7 +13,7 @@ import { useTimer } from '@mzaleski/use-timer';
 
 export const PomodoroTimer = () => {
 
-    const { minutes, seconds, handleTimerState, resetTimer, isFrozen, timerCompleted, setTimerCompleted,timerSession } = useContext(TimerContext);
+    const { minutes, seconds, handleTimerState, resetTimer, isFrozen, timerCompleted, setTimerCompleted,timerSession,localStorageReset } = useContext(TimerContext);
     // const { timeRemaining, secondsRemaining, setFreeze, resetTimer,isFrozen } = useTimer(60, true,
     //     () => console.log('Timer finished!')
     // );
@@ -24,6 +25,7 @@ export const PomodoroTimer = () => {
     // const handleTimerState = () => {
     //     isFrozen ? setFreeze(false) : setFreeze(true);
     // }
+    
     return (
         <div className='timer-content-container'>
             <div className="timer-container">
@@ -45,7 +47,11 @@ export const PomodoroTimer = () => {
                 <div className='seconds-container'>{ seconds.toString().padStart(2,'0') }</div>
             </div>
             <div className="timer-session-container">
-                <div>{ timerSession } / 12</div>
+                <div>
+                    { timerSession } / 12
+                    <img src={reset} alt="" onClick={() => localStorageReset('TIMER_SESSION_STATE')} className="reset-icon" />
+                </div>
+                
             </div>
         </div>
     );

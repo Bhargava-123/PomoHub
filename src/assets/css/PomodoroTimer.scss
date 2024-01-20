@@ -8,6 +8,14 @@ $grey-btn-bg: #626262;
     filter: invert(100%);
 }
 
+.reset-icon{
+    padding-left: 10px;
+    height: 2rem;
+    background-color: $black-bg;
+    color: white;
+    
+}
+
 .timer-content-container{
     color: white;
     background-color: $black-bg;
