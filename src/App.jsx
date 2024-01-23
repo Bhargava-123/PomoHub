@@ -6,18 +6,23 @@ import { PomodoroTimer } from './components/PomodoroTimer'
 import TimerContextProvider from './contexts/TimerContextProvider'
 import RightPanel from './components/RightPanel'
 import ProgressBar from './components/ProgressBar'
+import {TodolistContextProvider} from './contexts/TodolistContextProvider'
+
 
 export default function App() {
   return (
     <div className="App">
       <PanelContextProvider>
-        <SidePanel></SidePanel>
+        <TodolistContextProvider>
+          <SidePanel></SidePanel>
+        </TodolistContextProvider>
       </PanelContextProvider>
       <TimerContextProvider>
         <PomodoroTimer></PomodoroTimer>
         <RightPanel></RightPanel>
         <ProgressBar></ProgressBar>
       </TimerContextProvider>
+      
       
     </div>
 

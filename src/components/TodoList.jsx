@@ -5,6 +5,7 @@ import checkBoxEmpty from "../assets/todo-list-logos/checkBoxEmpty.svg"
 import checkBoxChecked from "../assets/todo-list-logos/checkBoxChecked.svg"
 import todoOption from "../assets/todo-list-logos/todoOption.svg"
 import ContextMenu from './ContextMenu'
+import { TodolistContext } from '../contexts/TodolistContextProvider'
 
 
 export const Todo = ({ handleCheckBox, taskName }) => {
@@ -66,6 +67,7 @@ export const Todo = ({ handleCheckBox, taskName }) => {
 export default function TodoList() {
 
     const { collapse } = useContext(PanelContext);
+    const{list,setList,todoTaskList} = useContext(TodolistContext)
 
     const handleCheckBox = (todoContainerRef) => {
         console.log(todoContainerRef.current); 
@@ -81,28 +83,11 @@ export default function TodoList() {
         }
     }
 
-    const todoTaskList = [
-        {
-            taskName: "Study Compiler Design asldkfj",
-            isCompleted: false,
-
-        },
-        {
-            taskName: "Study Crypto",
-            isCompleted: true,
-        },
-        {
-            taskName: "STudy DSA",
-            isCompleted: false,
-        }
-    ]
-
-    const[list,setList] = useState([]);
 
         return (
             <div className={`todo-list-container ${!collapse ? "collapse" : ""}`}>
                 {
-                    todoTaskList.map((value, key) => {
+                    list.map((value, key) => {
                         return (
                             <Todo key = {key}
                                 taskName={value.taskName}

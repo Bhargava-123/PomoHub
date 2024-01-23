@@ -1,6 +1,7 @@
 import { useContext,useRef, useState } from "react"
 import "../assets/css/SidePanel.scss"
 import { PanelContext } from "../contexts/PanelContextProvider";
+import { TodolistContext } from "../contexts/TodolistContextProvider";
 import analyticsIcon from "../assets/analytics.svg"
 import timer from "../assets/timer.svg"
 import todoList from "../assets/todoList.svg"
@@ -18,7 +19,9 @@ export const SidePanel = () => {
     const collapseButtonRef = useRef();
     const arrowIconRef = useRef();
     const [showTodo,setShowTodo] = useState(false); //new state
+    const [addNew, setAddNew] = useState(false);
 
+    const {task,setTask, addItem} = useContext(TodolistContext);
     const { collapse, handleCollapse, handleTodoList } = useContext(PanelContext);
 
     const handleTodoExpand = () => {
@@ -59,10 +62,13 @@ export const SidePanel = () => {
                             </div>
                         </li>
                         {showTodo ? <TodoList></TodoList>:""}
+                        {addNew && <input type="text" onChange = {(events) => setTask(events.target.value)}/>}
+                        {addNew && <button onClick = {addItem}>Add</button> }
                     </ul>
 
+
                 </div>
-                <img src={addIcon} alt="" className="add-icon"/>
+                <img src={addIcon} alt="" className="add-icon" onClick={()=>setAddNew(!addNew)}/>
                 <div className="panel-footer">
                     <ul className="menu-list">
                         <li className="menu-item">
