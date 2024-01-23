@@ -97,6 +97,8 @@ export default function TodoList() {
         }
     ]
 
+    const[list,setList] = useState([]);
+
         return (
             <div className={`todo-list-container ${!collapse ? "collapse" : ""}`}>
                 {

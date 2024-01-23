@@ -1,10 +1,12 @@
-import { useContext,useRef } from "react"
+import { useContext,useRef, useState } from "react"
+import "../assets/css/SidePanel.scss"
 import { PanelContext } from "../contexts/PanelContextProvider";
 import analyticsIcon from "../assets/analytics.svg"
 import timer from "../assets/timer.svg"
 import todoList from "../assets/todoList.svg"
 import settings from "../assets/settings.svg"
 import arrowExpand from "../assets/todo-list-logos/arrowExpand.svg"
+import addIcon from "../assets/plus.svg"
 
 
 import { PanelHeader } from '../components/PanelHeader'
@@ -15,6 +17,7 @@ export const SidePanel = () => {
     const panelRef = useRef();
     const collapseButtonRef = useRef();
     const arrowIconRef = useRef();
+    const [showTodo,setShowTodo] = useState(false); //new state
 
     const { collapse, handleCollapse, handleTodoList } = useContext(PanelContext);
 
@@ -22,10 +25,12 @@ export const SidePanel = () => {
         if (arrowIconRef.current.className.includes("expanded")) {
             arrowIconRef.current.style.transform = "rotate(90deg)";
             arrowIconRef.current.className = "arrow-icon";
+            setShowTodo(!showTodo);
         }
         else {
             arrowIconRef.current.style.transform = "rotate(0deg)"
             arrowIconRef.current.className = "arrow-icon expanded";
+            setShowTodo(!showTodo);
             
         }
         
@@ -50,13 +55,14 @@ export const SidePanel = () => {
                             <img src={todoList} className='menu-icon' alt="" />
                             <p>To-Do List</p>
                             <div className="arrow-icon-container" onClick={handleTodoExpand}>
-                                <img src={arrowExpand} ref={ arrowIconRef } className="arrow-icon" alt="" />
+                                <img src={arrowExpand} ref={ arrowIconRef } className="arrow-icon" alt=""/>
                             </div>
                         </li>
-                        <TodoList></TodoList>
+                        {showTodo ? <TodoList></TodoList>:""}
                     </ul>
 
                 </div>
+                <img src={addIcon} alt="" className="add-icon"/>
                 <div className="panel-footer">
                     <ul className="menu-list">
                         <li className="menu-item">
