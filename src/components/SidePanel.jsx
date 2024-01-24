@@ -1,4 +1,4 @@
-import { useContext,useRef, useState } from "react"
+import { useContext,useRef, useState,useEffect } from "react"
 import "../assets/css/SidePanel.scss"
 import { PanelContext } from "../contexts/PanelContextProvider";
 import { TodolistContext } from "../contexts/TodolistContextProvider";
@@ -21,8 +21,9 @@ export const SidePanel = () => {
     const [showTodo,setShowTodo] = useState(false); //new state
     const [addNew, setAddNew] = useState(false);
 
-    const {task,setTask, addItem} = useContext(TodolistContext);
+    const { setTask, addItem } = useContext(TodolistContext);
     const { collapse, handleCollapse, handleTodoList } = useContext(PanelContext);
+
 
     const handleTodoExpand = () => {
         if (arrowIconRef.current.className.includes("expanded")) {

@@ -5,10 +5,11 @@ import checkBoxEmpty from "../assets/todo-list-logos/checkBoxEmpty.svg"
 import checkBoxChecked from "../assets/todo-list-logos/checkBoxChecked.svg"
 import todoOption from "../assets/todo-list-logos/todoOption.svg"
 import ContextMenu from './ContextMenu'
+import doneIcon from "../assets/todo-list-logos/done.svg"
 import { TodolistContext } from '../contexts/TodolistContextProvider'
 
 
-export const Todo = ({ handleCheckBox, taskName }) => {
+export const Todo = ({ handleCheckBox, taskName, taskId, doEdit }) => {
 
     const initialContextMenu = {
         show: false,
@@ -18,6 +19,7 @@ export const Todo = ({ handleCheckBox, taskName }) => {
     
     const todoContainerRef = useRef(null);
     const [rect, setRect] = useState();
+    const{setTask,change} = useContext(TodolistContext)
     useEffect(() => {
         document.addEventListener("click", handleClickOutside, true);
         console.log(todoContainerRef.current.getBoundingClientRect());
@@ -50,14 +52,14 @@ export const Todo = ({ handleCheckBox, taskName }) => {
                 <img src={checkBoxEmpty} alt="" className='checkBox' />
             </div>
             <div className="todo-task-name">
-                {taskName}
+                {doEdit ? <div><input className='edit-text-box' onChange={(events)=>setTask(events.target.value)}/> <img src={doneIcon} className='done-icon' onClick={() => change(taskId)}/></div>: taskName}
             </div>
             <div className="todo-option-container">
                 <img src={todoOption} className="todo-option" alt=""
                     onClick={(e) => handleContextMenu(e)}
                 />
             </div>
-            <ContextMenu show={contextMenu.show} x={contextMenu.x} y = {contextMenu.y}></ContextMenu>
+            <ContextMenu show={contextMenu.show} x={contextMenu.x} y = {contextMenu.y} taskId={taskId}></ContextMenu>
         </div>
     )  
 }
@@ -67,7 +69,7 @@ export const Todo = ({ handleCheckBox, taskName }) => {
 export default function TodoList() {
 
     const { collapse } = useContext(PanelContext);
-    const{list,setList,todoTaskList} = useContext(TodolistContext)
+    const{list} = useContext(TodolistContext);
 
     const handleCheckBox = (todoContainerRef) => {
         console.log(todoContainerRef.current); 
@@ -92,6 +94,8 @@ export default function TodoList() {
                             <Todo key = {key}
                                 taskName={value.taskName}
                                 handleCheckBox={handleCheckBox}
+                                taskId={value.id}
+                                doEdit={value.edit}
                             ></Todo>
                         )
                     })
