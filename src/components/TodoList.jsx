@@ -22,7 +22,6 @@ export const Todo = ({ handleCheckBox, taskName, taskId, doEdit }) => {
     const{setTask,change} = useContext(TodolistContext)
     useEffect(() => {
         document.addEventListener("click", handleClickOutside, true);
-        console.log(todoContainerRef.current.getBoundingClientRect());
         if (todoContainerRef.current) {
             const rect = todoContainerRef.current.getBoundingClientRect();
             setRect(rect);
@@ -30,18 +29,14 @@ export const Todo = ({ handleCheckBox, taskName, taskId, doEdit }) => {
     }, [])
     const handleClickOutside = (e) => {
         if (!todoContainerRef.current.contains(e.target)) {
-            console.log("CLICKED OUTSIDE");
             setContextMenu({ show: false });
-        }
-        else {
-            console.log("CLICKED INSIDE");
         }
     }
 
     const [contextMenu, setContextMenu] = useState(initialContextMenu);
 
     const handleContextMenu = (e) => {
-        console.log("SHOW CONTEXT MENU");
+
         const { pageX, pageY } = e;
         setContextMenu({show: true,x: rect.x+312, y: rect.y-120})
     }
@@ -72,8 +67,6 @@ export default function TodoList() {
     const{list} = useContext(TodolistContext);
 
     const handleCheckBox = (todoContainerRef) => {
-        console.log(todoContainerRef.current); 
-        console.log(todoContainerRef.current.children[0].children[0]);
         const checkBoxEle = todoContainerRef.current.children[0].children[0]
         if (todoContainerRef.current.className.includes("empty")) {
             checkBoxEle.src = checkBoxChecked
