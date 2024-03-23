@@ -8,11 +8,22 @@ import todoList from "../assets/todoList.svg"
 import settings from "../assets/settings.svg"
 import arrowExpand from "../assets/todo-list-logos/arrowExpand.svg"
 import addIcon from "../assets/plus.svg"
-
-
+import {TextField,Button} from '@mui/material';
+import { createTheme,ThemeProvider,colors } from "@mui/material";
 import { PanelHeader } from '../components/PanelHeader'
 import { CollapsedPanelHeader } from '../components/CollapsedPanelHeader'
 import TodoList from "./TodoList";
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: colors.common['black'],
+        },
+        secondary:{
+            main: colors.grey[700],
+        }
+    },
+})
 
 export const SidePanel = () => {
     const panelRef = useRef();
@@ -25,14 +36,16 @@ export const SidePanel = () => {
     const { collapse, handleCollapse, handleTodoList } = useContext(PanelContext);
 
 
+
     const handleTodoExpand = () => {
         if (arrowIconRef.current.className.includes("expanded")) {
-            arrowIconRef.current.style.transform = "rotate(90deg)";
+            arrowIconRef.current.style.transform = "rotate(0deg)";
             arrowIconRef.current.className = "arrow-icon";
             setShowTodo(!showTodo);
+            setAddNew(false);
         }
         else {
-            arrowIconRef.current.style.transform = "rotate(0deg)"
+            arrowIconRef.current.style.transform = "rotate(90deg)"
             arrowIconRef.current.className = "arrow-icon expanded";
             setShowTodo(!showTodo);
             
@@ -44,7 +57,7 @@ export const SidePanel = () => {
             <div className={`panel-container ${!collapse ? "collapse" : ""}`} ref={panelRef}>
                 <PanelHeader></PanelHeader>
                 <CollapsedPanelHeader></CollapsedPanelHeader>
-
+                
                 <div className="panel-content">
                     <ul className='menu-list'>
                         <li className="menu-item">
@@ -62,22 +75,36 @@ export const SidePanel = () => {
                                 <img src={arrowExpand} ref={ arrowIconRef } className="arrow-icon" alt=""/>
                             </div>
                         </li>
-                        {showTodo ? <TodoList></TodoList>:""}
-                        {addNew && <input type="text" onChange = {(events) => setTask(events.target.value)}/>}
-                        {addNew && <button onClick = {addItem}>Add</button> }
+                        {showTodo && <div className="Todo-list-container">
+                            <TodoList></TodoList>
+                                    </div>}
+                        <ThemeProvider theme={theme}>
+                            {addNew && <TextField
+                                    type="text"
+                                    className="text-box"
+                                    label="Task"
+                                    placeholder="Enter a Task"
+                                    color="secondary"
+                                    onChange = {(events) => setTask(events.target.value)}
+                                    required
+                                    />}
+                            {addNew && <Button variant="contained" color="secondary" onClick = {addItem}>Add</Button> }
+                        </ThemeProvider>
                     </ul>
 
 
                 </div>
-                <img src={addIcon} alt="" className="add-icon" onClick={()=>setAddNew(!addNew)}/>
-                <div className="panel-footer">
-                    <ul className="menu-list">
-                        <li className="menu-item">
-                            <img src={settings} className='menu-icon' alt="" />
-                            <p>Setting</p>
-                        </li>
-                    </ul>
+                <div className="bottom-part">
+                    <img src={addIcon} alt="" className="add-icon" onClick={()=>setAddNew(!addNew)}/>
+                    <div className="panel-footer">
+                        <ul className="menu-list">
+                            <li className="menu-item">
+                                <img src={settings} className='menu-icon' alt="" />
+                                <p>Setting</p>
+                            </li>
+                        </ul>
 
+                    </div>
                 </div>
             </div>
             <div className='width-adjuster' ref={collapseButtonRef}>

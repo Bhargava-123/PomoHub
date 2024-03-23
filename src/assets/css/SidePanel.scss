@@ -1,4 +1,37 @@
+$grey-btn-bg: #626262;
+$black-bg: rgb(33, 31, 31);
+
 .add-icon{
     display: flex;
     height: 50px;
+}
+
+.text-box{
+    background-color: $grey-btn-bg;
+    border-radius: 10px;
+    
+}
+
+.panel-content{
+    height: 60px;//hard coded height of the container, not dynamic, issues with flex T_T
+}
+
+.Todo-list-container{
+    width: calc(100% - 38px);
+    border-radius: 0.4rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1rem;
+    min-height: 0px;
+    max-height: 300px;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: $grey-btn-bg $black-bg;
+    scroll-snap-type: proximity;
+}
+
+.bottom-part{
+    display: contents;
 }
