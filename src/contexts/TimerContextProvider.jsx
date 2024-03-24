@@ -8,7 +8,7 @@ import sound_path from "/sounds/alarm.mp3"
 export default function TimerContextProvider({ children }) {
     
     const timerSetting = {
-        "work-mode" : 0.1,
+        "work-mode" : 50,
         "short-break": 10,
         "long-break" : 20
     }
