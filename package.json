@@ -12,10 +12,15 @@
   },
   "dependencies": {
     "@mzaleski/use-timer": "^1.2.3",
+    "howler": "^2.2.4",
+    "play-audio": "^0.5.2",
+    "play-sound": "^1.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-resizable": "^3.0.5",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "sound-play": "^1.1.0",
+    "util.promisify": "^1.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

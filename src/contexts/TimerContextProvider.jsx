@@ -1,14 +1,14 @@
 import { createContext,  useEffect, useState } from "react";
-import { useTimer }  from '@mzaleski/use-timer';
-
-
+import { useTimer } from '@mzaleski/use-timer';
+import { Howl, Howler } from 'howler';
 export const TimerContext = createContext({});
-
+import path from "path";
+import sound_path from "/sounds/alarm.mp3"
 
 export default function TimerContextProvider({ children }) {
     
     const timerSetting = {
-        "work-mode" : 50,
+        "work-mode" : 0.1,
         "short-break": 10,
         "long-break" : 20
     }
@@ -45,7 +45,12 @@ export default function TimerContextProvider({ children }) {
     const { secondsRemaining, setFreeze, resetTimer, isFrozen } =
     useTimer(initialTimer*60, true,
         () => {
+
             setTimerCompleted(true);
+            var sound = new Howl({
+                src: [sound_path]
+            });
+            sound.play()
             if (timerMode === "work-mode") {
                 setTimerSession(timerSession + 1);
             }
