@@ -9,12 +9,15 @@ export const TodolistContextProvider = ({ children }) => {
     const[list,setList] = useState([]);
 
     const addItem = () =>{
-        setList([...list,{
-            id : list.length === 0 ? 1 : list[list.length-1].id+1,
-            taskName: task,
-            isCompleted: false,
-            edit: false,
-        }]);
+        if(task.length>=1){
+            setList([...list,{
+                id : list.length === 0 ? 1 : list[list.length-1].id+1,
+                taskName: task,
+                isCompleted: false,
+                edit: false,
+            }]);
+            setTask("");
+        }
     }
 
     const deleteItem = (taskId) =>{
