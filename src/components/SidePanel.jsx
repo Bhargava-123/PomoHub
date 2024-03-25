@@ -17,10 +17,11 @@ import TodoList from "./TodoList";
 const theme = createTheme({
     palette: {
         primary: {
-            main: colors.common['black'],
+            main: colors.grey[700],
         },
         secondary:{
-            main: colors.grey[700],
+            main: colors.common['white'],
+            
         }
     },
 })
@@ -86,9 +87,8 @@ export const SidePanel = () => {
                                     placeholder="Enter a Task"
                                     color="secondary"
                                     onChange = {(events) => setTask(events.target.value)}
-                                    required
                                     />}
-                            {addNew && <Button variant="contained" color="secondary" onClick = {addItem}>Add</Button> }
+                            {addNew && <Button variant="contained" onClick = {addItem}>Add</Button> }
                         </ThemeProvider>
                     </ul>
 
